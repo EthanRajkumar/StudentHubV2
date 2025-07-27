@@ -35,7 +35,7 @@ public class HelloController {
 
     @FXML
     protected void onLoginButtonClick() throws IOException {
-        //errorText.setText("Invalid login credentials; please try again");
+        //to do: change if statement condition to check for valid credentials from database
         if (usernameTextField.getText().equals(passwordTextField.getText())) {
             errorText.setText("Logging in...");
             //this part: check user credentials to transition to student/instructor/admin scenes accordingly
