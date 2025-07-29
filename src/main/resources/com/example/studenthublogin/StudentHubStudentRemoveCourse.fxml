@@ -32,17 +32,21 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
+<?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="studentMenuVBox" prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.studenthublogin.StudentMenuController">
+<VBox fx:id="studentRemoveCourseVBox" prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.studenthublogin.StudentRemoveCourseController">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
@@ -83,20 +87,38 @@
         </Menu>
       </menus>
     </MenuBar>
-    <AnchorPane fx:id="studentMenuAnchorPane" maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
-      <children>
-            <Label layoutX="23.0" layoutY="14.0" text="StudentHub for Students">
+      <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0">
+         <children>
+            <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" style="&#10;" text="Remove Course" textAlignment="CENTER" wrapText="false">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Button fx:id="studentSelectCourseSearch" layoutX="38.0" layoutY="64.0" mnemonicParsing="false" onAction="#onStudentSelectCourseSearchPress" text="Course Search" />
-            <Button fx:id="studentSelectAdvCourseSearch" layoutX="37.0" layoutY="104.0" mnemonicParsing="false" onAction="#onStudentSelectAdvCourseSearchPress" text="Advanced Course Search" />
-            <Button fx:id="studentSelectAddCourse" layoutX="37.0" layoutY="147.0" mnemonicParsing="false" onAction="#onStudentSelectAddCoursePress" text="Register for a Course" />
-            <Button fx:id="studentSelectRemoveCourse" layoutX="37.0" layoutY="189.0" mnemonicParsing="false" onAction="#onStudentSelectRemoveCoursePress" text="Unregister from a Course" />
-            <Button fx:id="studentSelectShowSchedule" layoutX="37.0" layoutY="233.0" mnemonicParsing="false" onAction="#onStudentSelectShowSchedulePress" text="Show schedule" />
-            <Button fx:id="studentSelectLogout" layoutX="37.0" layoutY="318.0" mnemonicParsing="false" onAction="#onStudentSelectLogoutPress" text="Logout" />
-      </children>
-    </AnchorPane>
+            <TableView fx:id="courseTable" layoutX="14.0" layoutY="47.0" prefHeight="256.0" prefWidth="612.0">
+               <columns>
+                  <TableColumn fx:id="courseTableCourseID" prefWidth="61.0" text="Course ID" />
+                  <TableColumn fx:id="courseTableCourseName" prefWidth="108.0" text="Course Name" />
+                  <TableColumn fx:id="courseTableDept" prefWidth="38.0" text="Dept." />
+                  <TableColumn fx:id="courseTableTime" prefWidth="41.0" text="Time" />
+                  <TableColumn fx:id="courseTableDays" prefWidth="72.0" text="Days" />
+                  <TableColumn fx:id="courseTableSemesters" prefWidth="75.0" text="Semesters" />
+                  <TableColumn fx:id="courseTableYear" prefWidth="63.0" text="Year" />
+                  <TableColumn fx:id="courseTableCredits" prefWidth="46.0" text="Credits" />
+                  <TableColumn fx:id="courseTableSeats" prefWidth="41.0" text="Seats" />
+                  <TableColumn fx:id="courseTableInstructor" prefWidth="66.0" text="Instructor" />
+               </columns>
+            </TableView>
+            <TextField fx:id="studentRemoveCourseInput" alignment="CENTER" layoutX="412.0" layoutY="312.0" prefHeight="25.0" prefWidth="152.0" promptText="Course Name" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="314.0" prefHeight="20.0" prefWidth="394.0" text="Enter the name of the course you would like to unregister from:" wrapText="true">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Button fx:id="studentEnterRemoveCourse" layoutX="573.0" layoutY="312.0" mnemonicParsing="false" onAction="#onStudentEnterRemoveCourse" text="Enter" />
+            <Label fx:id="studentRemoveCourseResult" alignment="CENTER" contentDisplay="CENTER" layoutX="386.0" layoutY="345.0" prefHeight="17.0" prefWidth="205.0" textFill="RED" />
+            <Button fx:id="studentReturnToMenu" layoutX="532.0" layoutY="14.0" mnemonicParsing="false" onAction="#onStudentReturnToMenuPress" text="Return to menu" />
+            <Accordion layoutX="140.0" layoutY="230.0" />
+         </children>
+      </AnchorPane>
   </children>
 </VBox>

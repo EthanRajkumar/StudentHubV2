@@ -17,4 +17,34 @@ public class StudentMenuController {
     @FXML
     private VBox studentMenuVBox;
 
+    @FXML
+    protected void onStudentSelectCourseSearchPress() throws IOException {
+        new SceneSwitch(studentMenuVBox, "StudentHubSearchCourse.fxml");
+    }
+
+    @FXML
+    protected void onStudentSelectAdvCourseSearchPress() throws IOException {
+        new SceneSwitch(studentMenuVBox, "StudentHubSearchCourseAdv.fxml");
+    }
+
+    @FXML
+    protected void onStudentSelectAddCoursePress() throws IOException {
+        new SceneSwitch(studentMenuVBox, "StudentHubStudentAddCourse.fxml");
+    }
+
+    @FXML
+    protected void onStudentSelectRemoveCoursePress() throws IOException {
+        new SceneSwitch(studentMenuVBox, "StudentHubStudentRemoveCourse.fxml");
+    }
+
+    @FXML
+    protected void onStudentSelectShowSchedulePress() throws IOException {
+        new SceneSwitch(studentMenuVBox, "StudentHubStudentShowSchedule.fxml");
+    }
+
+    @FXML
+    protected void onStudentSelectLogoutPress() throws IOException {
+        new SceneSwitch(studentMenuVBox, "StudentHubLogin.fxml");
+    }
+
 }

@@ -38,11 +38,14 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="studentMenuVBox" prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.studenthublogin.StudentMenuController">
+<VBox fx:id="searchCourseVBox" prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.studenthublogin.SearchCourseController">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
@@ -83,19 +86,39 @@
         </Menu>
       </menus>
     </MenuBar>
-    <AnchorPane fx:id="studentMenuAnchorPane" maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
-            <Label layoutX="23.0" layoutY="14.0" text="StudentHub for Students">
+            <Label alignment="CENTER" layoutX="14.0" layoutY="8.0" style="&#10;" text="Search Course" textAlignment="CENTER" wrapText="false">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Button fx:id="studentSelectCourseSearch" layoutX="38.0" layoutY="64.0" mnemonicParsing="false" onAction="#onStudentSelectCourseSearchPress" text="Course Search" />
-            <Button fx:id="studentSelectAdvCourseSearch" layoutX="37.0" layoutY="104.0" mnemonicParsing="false" onAction="#onStudentSelectAdvCourseSearchPress" text="Advanced Course Search" />
-            <Button fx:id="studentSelectAddCourse" layoutX="37.0" layoutY="147.0" mnemonicParsing="false" onAction="#onStudentSelectAddCoursePress" text="Register for a Course" />
-            <Button fx:id="studentSelectRemoveCourse" layoutX="37.0" layoutY="189.0" mnemonicParsing="false" onAction="#onStudentSelectRemoveCoursePress" text="Unregister from a Course" />
-            <Button fx:id="studentSelectShowSchedule" layoutX="37.0" layoutY="233.0" mnemonicParsing="false" onAction="#onStudentSelectShowSchedulePress" text="Show schedule" />
-            <Button fx:id="studentSelectLogout" layoutX="37.0" layoutY="318.0" mnemonicParsing="false" onAction="#onStudentSelectLogoutPress" text="Logout" />
+            <TableView fx:id="courseTable" layoutX="14.0" layoutY="79.0" prefHeight="256.0" prefWidth="612.0">
+               <columns>
+                  <TableColumn fx:id="courseTableCourseID" prefWidth="61.0" text="Course ID" />
+                  <TableColumn fx:id="courseTableCourseName" prefWidth="108.0" text="Course Name" />
+                  <TableColumn fx:id="courseTableDept" prefWidth="38.0" text="Dept." />
+                  <TableColumn fx:id="courseTableTime" prefWidth="41.0" text="Time" />
+                  <TableColumn fx:id="courseTableDays" prefWidth="72.0" text="Days" />
+                  <TableColumn fx:id="courseTableSemesters" prefWidth="75.0" text="Semesters" />
+                  <TableColumn fx:id="courseTableYear" prefWidth="63.0" text="Year" />
+                  <TableColumn fx:id="courseTableCredits" prefWidth="46.0" text="Credits" />
+                  <TableColumn fx:id="courseTableSeats" prefWidth="41.0" text="Seats" />
+                  <TableColumn fx:id="courseTableInstructor" prefWidth="66.0" text="Instructor" />
+               </columns>
+            </TableView>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="45.0" prefHeight="20.0" prefWidth="356.0" text="Enter the department acronym of the course(s) to search for:" wrapText="true">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
+            <TextField fx:id="searchCourseInput" layoutX="370.0" layoutY="43.0" prefHeight="25.0" prefWidth="213.0" promptText="DEPT (BSCO/BSEE/BCOS/BSAS/HUSS)" />
+            <Button fx:id="userEnterSearchCourse" layoutX="587.0" layoutY="43.0" mnemonicParsing="false" onAction="#onUserEnterSearchCourse" prefHeight="25.0" prefWidth="48.0" text="Search">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Button>
+            <Button fx:id="studentReturnToMenu" layoutX="526.0" layoutY="9.0" mnemonicParsing="false" onAction="#onStudentReturnToMenuPress" prefHeight="6.0" prefWidth="100.0" text="Return to menu" />
       </children>
     </AnchorPane>
   </children>
