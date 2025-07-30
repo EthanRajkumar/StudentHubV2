@@ -12,18 +12,18 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Objects;
 
-public class SearchCourseController {
+public class InstructorShowCourseRosterController {
 
     @FXML
-    private VBox searchCourseVBox;
+    private VBox instructorShowCourseRosterVBox;
 
     @FXML
-    protected void onStudentReturnToMenuPress() throws IOException {
-        new SceneSwitch(searchCourseVBox, "StudentHubStudentMenu.fxml");
+    protected void onInstructorReturnToMenuPress() throws IOException {
+        new SceneSwitch(instructorShowCourseRosterVBox, "StudentHubInstructorMenu.fxml");
     }
 
     @FXML
-    protected void onUserEnterSearchCourse() throws IOException {
+    protected void onUserEnterSearchCourseID() throws IOException {
 
     }
 

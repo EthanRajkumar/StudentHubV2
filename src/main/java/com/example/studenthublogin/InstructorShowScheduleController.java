@@ -12,19 +12,13 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Objects;
 
-public class SearchCourseAdvController {
+public class InstructorShowScheduleController {
 
     @FXML
-    private VBox searchCourseAdvVBox;
+    private VBox instructorShowScheduleVBox;
 
     @FXML
-    protected void onStudentReturnToMenuPress() throws IOException {
-        new SceneSwitch(searchCourseAdvVBox, "StudentHubStudentMenu.fxml");
+    protected void onInstructorReturnToMenuPress() throws IOException {
+        new SceneSwitch(instructorShowScheduleVBox, "StudentHubInstructorMenu.fxml");
     }
-
-    @FXML
-    protected void onUserEnterSearchCourseAdv() throws IOException {
-
-    }
-
 }

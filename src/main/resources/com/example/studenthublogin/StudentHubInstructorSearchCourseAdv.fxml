@@ -45,7 +45,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="searchCourseAdvVBox" prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.studenthublogin.SearchCourseAdvController">
+<VBox fx:id="searchCourseAdvVBox" prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.studenthublogin.InstructorSearchCourseAdvController">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
@@ -142,7 +142,7 @@
                </font>
             </Label>
             <TextField fx:id="searchCourseYear" layoutX="370.0" layoutY="168.0" prefHeight="25.0" prefWidth="213.0" promptText="Year (YYYY)" />
-            <Button fx:id="studentReturnToMenu" layoutX="526.0" layoutY="9.0" mnemonicParsing="false" onAction="#onStudentReturnToMenuPress" prefHeight="6.0" prefWidth="100.0" text="Return to menu" />
+            <Button fx:id="instructorReturnToMenu" layoutX="526.0" layoutY="9.0" mnemonicParsing="false" onAction="#onInstructorReturnToMenuPress" prefHeight="6.0" prefWidth="100.0" text="Return to menu" />
       </children>
     </AnchorPane>
   </children>

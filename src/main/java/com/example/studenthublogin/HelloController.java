@@ -40,7 +40,8 @@ public class HelloController {
             errorText.setText("Logging in...");
             //this part: check user credentials to transition to student/instructor/admin scenes accordingly
             //transition to student scene (if blah blah blah database query blah blah blah)
-            new SceneSwitch(loginVBox, "StudentHubStudentMenu.fxml");
+            //new SceneSwitch(loginVBox, "StudentHubStudentMenu.fxml");
+            new SceneSwitch(loginVBox, "StudentHubInstructorMenu.fxml");
         }
         else {
             errorText.setText("Invalid login credentials; please try again");

@@ -22,5 +22,4 @@ public class StudentShowScheduleController {
         new SceneSwitch(studentShowScheduleVBox, "StudentHubStudentMenu.fxml");
     }
 
-
 }

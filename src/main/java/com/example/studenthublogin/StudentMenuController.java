@@ -19,12 +19,12 @@ public class StudentMenuController {
 
     @FXML
     protected void onStudentSelectCourseSearchPress() throws IOException {
-        new SceneSwitch(studentMenuVBox, "StudentHubSearchCourse.fxml");
+        new SceneSwitch(studentMenuVBox, "StudentHubStudentSearchCourse.fxml");
     }
 
     @FXML
     protected void onStudentSelectAdvCourseSearchPress() throws IOException {
-        new SceneSwitch(studentMenuVBox, "StudentHubSearchCourseAdv.fxml");
+        new SceneSwitch(studentMenuVBox, "StudentHubStudentSearchCourseAdv.fxml");
     }
 
     @FXML
