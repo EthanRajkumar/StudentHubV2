@@ -44,17 +44,30 @@ public class AdminMenuController {
 
     @FXML
     protected void onAdminSelectLinkInstructor() throws IOException {
-        new SceneSwitch(adminMenuVBox, "StudentHubAdminLinkInstructor.fxml");
+        //new SceneSwitch(adminMenuVBox, "StudentHubAdminLinkInstructor.fxml");
+        new SceneSwitch(adminMenuVBox, "StudentHubAdminMenu.fxml");
     }
 
     @FXML
     protected void onAdminSelectUnlinkInstructor() throws IOException {
-        new SceneSwitch(adminMenuVBox, "StudentHubAdminUnlinkInstructor.fxml");
+        //new SceneSwitch(adminMenuVBox, "StudentHubAdminUnlinkInstructor.fxml");
+        new SceneSwitch(adminMenuVBox, "StudentHubAdminMenu.fxml");
     }
 
     @FXML
     protected void onAdminSelectRegisterStudent() throws IOException {
-        new SceneSwitch(adminMenuVBox, "StudentHubAdminUnregisterStudent.fxml");
+        //new SceneSwitch(adminMenuVBox, "StudentHubAdminRegisterStudent.fxml");
+        new SceneSwitch(adminMenuVBox, "StudentHubAdminMenu.fxml");
     }
 
+    @FXML
+    protected void onAdminSelectUnregisterStudent() throws IOException {
+        //new SceneSwitch(adminMenuVBox, "StudentHubAdminUnregisterStudent.fxml");
+        new SceneSwitch(adminMenuVBox, "StudentHubAdminMenu.fxml");
+    }
+
+    @FXML
+    protected void onAdminSelectLogout() throws IOException {
+        new SceneSwitch(adminMenuVBox, "StudentHubLogin.fxml");
+    }
 }
