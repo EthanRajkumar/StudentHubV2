@@ -38,18 +38,16 @@ public class HelloController {
         //to do: change if statement condition to check for valid credentials from database
         if (usernameTextField.getText().equals(passwordTextField.getText())) {
             errorText.setText("Logging in...");
-            //this part: check user credentials to transition to student/instructor/admin scenes accordingly
+            //this part: check user credentials to transition to student/instructor/admin interfaces accordingly
             //transition to student scene (if blah blah blah database query blah blah blah)
             //new SceneSwitch(loginVBox, "StudentHubStudentMenu.fxml");
-            new SceneSwitch(loginVBox, "StudentHubInstructorMenu.fxml");
+            //new SceneSwitch(loginVBox, "StudentHubInstructorMenu.fxml");
+            new SceneSwitch(loginVBox, "StudentHubAdminMenu.fxml");
         }
         else {
             errorText.setText("Invalid login credentials; please try again");
         }
 
     }
-
-    //for pasting at end of "<VBox..." line in fxml files after making SceneBuilder changes
-    //fx:controller="com.example.studenthublogin.*Controller"
 
 }
