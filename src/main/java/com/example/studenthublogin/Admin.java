@@ -281,6 +281,20 @@ public class Admin extends User {
 			System.out.println("Course with this ID does not exist");
 		}
 	}
+
+	public static void CreateStudent(String in_name, String in_surname, String in_id, String in_email, String in_major, int in_gradyear)
+	{
+		Student newStudent = new Student(in_name, in_surname, in_id, in_gradyear, in_major, in_email);
+		String update = SqlSerializer.StudentToSql(newStudent,"STUDENT");
+		SqlExecuter.RunUpdate("", update);
+	}
+
+	public static void CreateAdmin(String in_name, String in_surname, String in_id, String in_email, String in_title, String in_major, int in_hireyear)
+	{
+		Instructor newInstructor = new Instructor(in_name, in_surname, in_id, in_title, in_hireyear, in_major, in_email);
+		String update = SqlSerializer.InstructorToSql(newInstructor, "INSTRUCTOR");
+		SqlExecuter.RunUpdate("", update);
+	}
 	
 	public void CreateUser()
 	{

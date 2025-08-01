@@ -5,6 +5,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class AdminAddNewInstructorController {
 
@@ -28,7 +30,47 @@ public class AdminAddNewInstructorController {
                 && !setInstructorYearOfHire.getText().isEmpty() && !setInstructorDept.getText().isEmpty() && !setInstructorEmail.getText().isEmpty()
                 && !setInstructorTitle.getText().isEmpty()) {
 
-            resultMsg.setText("");
+            int hireYearInput = -1;
+
+            try { hireYearInput = Integer.parseInt(setInstructorYearOfHire.getText()); }
+            catch (Exception e) { System.out.println(e); }
+
+            ResultSet rs = SqlExecuter.RunQuery("", "SELECT * FROM LOGIN WHERE EMAIL = '" + setInstructorEmail.getText() + "'");
+
+            try
+            {
+                if (rs.next())
+                {
+                    resultMsg.setText("This email is already taken.");
+                    return;
+                }
+            }
+
+            catch (SQLException e) { System.out.println(e); }
+
+            rs = SqlExecuter.RunQuery("", "SELECT * FROM INSTRUCTOR WHERE ID = '" + setInstructorID.getText() + "'");
+
+            try
+            {
+                if (rs.next())
+                {
+                    resultMsg.setText("This ID is already taken.");
+                    return;
+                }
+            }
+            catch (SQLException e) { System.out.println(e); }
+
+            if (hireYearInput <= 0)
+            {
+                resultMsg.setText("Invalid hire year. Please insert values > 1.");
+                return;
+            }
+
+            Admin.CreateStudent(setInstructorFirstName.getText(), setInstructorLastName.getText(), setInstructorID.getText(), setInstructorID.getText(), setInstructorDept.getText(), hireYearInput);
+
+            SqlExecuter.RunUpdate("", "INSERT INTO LOGIN VALUES ('" + setInstructorEmail.getText() + "', 'instructor', '" + setInstructorEmail.getText() + "')");
+
+            resultMsg.setText("Successfully added instructor to database.");
         }
         else {
             resultMsg.setText("One or more fields have been left blank");
