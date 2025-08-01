@@ -1,4 +1,4 @@
-package studenthub;
+package com.example.studenthublogin;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

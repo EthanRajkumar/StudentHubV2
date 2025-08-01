@@ -1,4 +1,4 @@
-package studenthub;
+package com.example.studenthublogin;
 
 import java.sql.*;
 import java.util.Arrays;
@@ -255,7 +255,7 @@ public class Admin extends User {
 
 			}
 		}
-		Course newCourse = new Course(courseName, courseDept, CRN, time, days, semesters, year, cred, seats);
+		Course newCourse = new Course(courseName, courseDept, CRN, time, days, semesters, year, cred, seats, "");
 		String update = SqlSerializer.CourseToSql(newCourse,"COURSE");
 		SqlExecuter.RunUpdate("", update);
 		System.out.println("Course created: \nName: " + newCourse.getTitle() + "\nDepartment: " + newCourse.getDepartment() + "\nCourse ID: " + newCourse.getCRN()

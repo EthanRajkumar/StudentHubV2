@@ -1,4 +1,4 @@
-package studenthub;
+package com.example.studenthublogin;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -56,6 +56,51 @@ public abstract class User {
 	{
 		List<Course> courses = new ArrayList<>();
 		ResultSet rs = SqlExecuter.RunQuery("", "SELECT * FROM COURSE WHERE DEPARTMENT = '" + department + "';");
+
+		try {
+			while (rs.next()) {
+				courses.add(SqlSerializer.CourseFromSql(rs));
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+
+		return courses;
+	}
+
+	public static List<Course> SearchCourseByParam(int in_crn, String in_title, String in_dept, String in_semester, int in_year)
+	{
+		List<Course> courses = new ArrayList<>();
+		String query = "SELECT * FROM COURSE";
+		boolean firstCondition = true, crn = in_crn != -1, title = in_title != "", department = in_dept != "", semester = in_semester != "", year = in_year != -1;
+
+		if (crn || title || department || semester || year) {
+			query += " WHERE";
+		}
+
+		if (crn) {
+			query += (firstCondition ? " " : " AND ") + "CRN = " + in_crn;
+			firstCondition = false;
+		}
+		if (title) {
+			query += (firstCondition ? " " : " AND ") + "TITLE LIKE '%" + in_title + "%'";
+			firstCondition = false;
+		}
+		if (department) {
+			query += (firstCondition ? " " : " AND ") + "DEPARTMENT LIKE '%" + in_dept + "%'";
+			firstCondition = false;
+		}
+		if (semester) {
+			query += (firstCondition ? " " : " AND ") + "SEMESTERS LIKE '%" + in_semester + "%'";
+			firstCondition = false;
+		}
+		if (year) {
+			query += (firstCondition ? " " : " AND ") + "YEAR = " + in_year;
+		}
+
+		System.out.println(query);
+
+		ResultSet rs = SqlExecuter.RunQuery("", query);
 
 		try {
 			while (rs.next()) {

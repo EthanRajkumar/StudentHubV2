@@ -1,9 +1,8 @@
-package studenthub;
+package com.example.studenthublogin;
 
 import java.util.Scanner;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 
 //User responsible for Student functionality is Ethan Rajkumar
 public class Student extends User {

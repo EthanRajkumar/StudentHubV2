@@ -1,8 +1,7 @@
-package studenthub;
+package com.example.studenthublogin;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Locale;
 
 public class SqlSerializer {
     public static String StudentToSql(Student student, String tableName) {
@@ -132,6 +131,7 @@ public class SqlSerializer {
             int id = Integer.parseInt(rs.getString("CRN"));
             String title = rs.getString("TITLE");
             String department = rs.getString("DEPARTMENT");
+            String instructorID = rs.getString("INSTRUCTOR");
             int time = Integer.parseInt(rs.getString("TIME"));
             String[] days = new String[]{rs.getString("DAYS")},
                     semesters = new String[]{rs.getString("SEMESTERS")};
@@ -139,7 +139,7 @@ public class SqlSerializer {
                     credits = Integer.parseInt(rs.getString("CREDITS")),
                     seats = Integer.parseInt(rs.getString("SEATS"));
 
-            return new Course(title, department, id, time, days, semesters, year, credits, seats);
+            return new Course(title, department, id, time, days, semesters, year, credits, seats, instructorID);
         } catch (SQLException e) {
             System.out.println("Error parsing Course object. " + e);
             return null;

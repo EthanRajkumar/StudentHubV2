@@ -1,9 +1,7 @@
-package studenthub;
+package com.example.studenthublogin;
 
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Scanner;
 
 //User responsible for Instructor functionality is Matthew Spillane

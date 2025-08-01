@@ -1,19 +1,13 @@
 package com.example.studenthublogin;
 
 import javafx.fxml.FXML;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.*;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import studenthub.SqlExecuter;
 
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Objects;
 
 public class HelloController extends SceneController {
 //    @FXML
@@ -60,21 +54,28 @@ public class HelloController extends SceneController {
         else {
             errorText.setText("Logging in...");
 
+            rs = SqlExecuter.RunQuery("", "SELECT * FROM " + role + " WHERE EMAIL='" + usernameTextField.getText() + "';");
+
             switch (role.toUpperCase().trim())
             {
                 default:
                 case "STUDENT":
                 {
+                    Globals.Student = SqlSerializer.StudentFromSql(rs);
                     SceneSwapper.SwapScene("StudentHubStudentMenu.fxml");
                     break;
                 }
+
                 case "INSTRUCTOR":
                 {
+                    Globals.Instructor = SqlSerializer.InstructorFromSql(rs);
                     SceneSwapper.SwapScene("StudentHubInstructorMenu.fxml");
                     break;
                 }
+
                 case "ADMIN":
                 {
+                    Globals.Admin = SqlSerializer.AdminFromSql(rs);
                     SceneSwapper.SwapScene("StudentHubAdminMenu.fxml");
                     break;
                 }
