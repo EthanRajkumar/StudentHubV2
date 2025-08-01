@@ -13,7 +13,7 @@ public class AdminLinkInstructorController {
 
     @FXML
     protected void onAdminReturnToMenuPress() throws IOException {
-        new SceneSwitch(adminLinkInstructorVBox, "StudentHubAdminMenu.fxml");
+        SceneSwapper.SwapScene("StudentHubAdminMenu.fxml");
     }
 
     @FXML

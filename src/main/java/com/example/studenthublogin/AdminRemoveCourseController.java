@@ -16,7 +16,7 @@ public class AdminRemoveCourseController {
 
     @FXML
     protected void onAdminReturnToMenuPress() throws IOException {
-        new SceneSwitch(adminRemoveCourseVBox, "StudentHubAdminMenu.fxml");
+        SceneSwapper.SwapScene("StudentHubAdminMenu.fxml");
     }
 
     @FXML

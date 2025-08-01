@@ -12,14 +12,14 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Objects;
 
-public class StudentRemoveCourseController {
+public class StudentRemoveCourseController extends SceneController {
 
     @FXML
     private VBox studentRemoveCourseVBox;
 
     @FXML
     protected void onStudentReturnToMenuPress() throws IOException {
-        new SceneSwitch(studentRemoveCourseVBox, "StudentHubStudentMenu.fxml");
+        SceneSwapper.SwapScene("StudentHubStudentMenu.fxml");
     }
 
     @FXML

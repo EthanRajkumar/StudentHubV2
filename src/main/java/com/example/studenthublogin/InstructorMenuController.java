@@ -12,39 +12,39 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Objects;
 
-public class InstructorMenuController {
+public class InstructorMenuController extends SceneController {
 
     @FXML
     private VBox instructorMenuVBox;
 
     @FXML
     protected void onInstructorSelectCourseSearch() throws IOException {
-        new SceneSwitch(instructorMenuVBox, "StudentHubInstructorSearchCourse.fxml");
+        SceneSwapper.SwapScene("StudentHubInstructorSearchCourse.fxml");
     }
 
     @FXML
     protected void onInstructorSelectAdvCourseSearch() throws IOException {
-        new SceneSwitch(instructorMenuVBox, "StudentHubInstructorSearchCourseAdv.fxml");
+        SceneSwapper.SwapScene("StudentHubInstructorSearchCourseAdv.fxml");
     }
 
     @FXML
     protected void onInstructorSelectShowSchedule() throws IOException {
-        new SceneSwitch(instructorMenuVBox, "StudentHubInstructorShowSchedule.fxml");
+        SceneSwapper.SwapScene("StudentHubInstructorShowSchedule.fxml");
     }
 
     @FXML
     protected void onInstructorSelectShowCourseRoster() throws IOException {
-        new SceneSwitch(instructorMenuVBox, "StudentHubInstructorShowCourseRoster.fxml");
+        SceneSwapper.SwapScene("StudentHubInstructorShowCourseRoster.fxml");
     }
 
     @FXML
     protected void onInstructorSelectSearchCourseRoster() throws IOException {
-        new SceneSwitch(instructorMenuVBox, "StudentHubInstructorSearchCourseRoster.fxml");
+        SceneSwapper.SwapScene("StudentHubInstructorSearchCourseRoster.fxml");
     }
 
     @FXML
     protected void onInstructorSelectLogoutPress() throws IOException {
-        new SceneSwitch(instructorMenuVBox, "StudentHubLogin.fxml");
+        SceneSwapper.SwapScene("StudentHubLogin.fxml");
     }
 
 }

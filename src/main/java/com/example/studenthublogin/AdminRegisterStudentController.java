@@ -13,7 +13,7 @@ public class AdminRegisterStudentController {
 
     @FXML
     protected void onAdminReturnToMenuPress() throws IOException {
-        new SceneSwitch(adminRegisterStudentVBox, "StudentHubAdminMenu.fxml");
+        SceneSwapper.SwapScene("StudentHubAdminMenu.fxml");
     }
 
     @FXML

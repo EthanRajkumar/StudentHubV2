@@ -13,17 +13,17 @@ public class AdminAddUserController {
 
     @FXML
     protected void onAdminReturnToMenuPress() throws IOException {
-        new SceneSwitch(adminAddUserVBox, "StudentHubAdminMenu.fxml");
+        SceneSwapper.SwapScene("StudentHubAdminMenu.fxml");
     }
 
     @FXML
     protected void onAdminSelectNewStudent() throws IOException {
-        new SceneSwitch(adminAddUserVBox, "StudentHubAdminAddNewStudent.fxml");
+        SceneSwapper.SwapScene("StudentHubAdminAddNewStudent.fxml");
     }
 
     @FXML
     protected void onAdminSelectNewInstructor() throws IOException {
-        new SceneSwitch(adminAddUserVBox, "StudentHubAdminAddNewInstructor.fxml");
+        SceneSwapper.SwapScene("StudentHubAdminAddNewInstructor.fxml");
     }
 
 }

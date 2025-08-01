@@ -5,14 +5,14 @@ import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 
-public class InstructorSearchCourseAdvController {
+public class InstructorSearchCourseAdvController extends SceneController {
 
     @FXML
     private VBox searchCourseAdvVBox;
 
     @FXML
     protected void onInstructorReturnToMenuPress() throws IOException {
-        new SceneSwitch(searchCourseAdvVBox, "StudentHubInstructorMenu.fxml");
+        SceneSwapper.SwapScene("StudentHubInstructorMenu.fxml");
     }
 
     @FXML

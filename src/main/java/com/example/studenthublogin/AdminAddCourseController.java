@@ -6,7 +6,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import java.io.IOException;
 
-public class AdminAddCourseController {
+public class AdminAddCourseController extends SceneController {
 
     @FXML
     private CheckBox mondayCheckBox, tuesdayCheckBox, wednesdayCheckBox, thursdayCheckBox, fridayCheckBox, springCheckBox, summerCheckBox, fallCheckBox;
@@ -23,7 +23,7 @@ public class AdminAddCourseController {
 
     @FXML
     protected void onAdminReturnToMenuPress() throws IOException {
-        new SceneSwitch(adminAddCourseVBox, "StudentHubAdminMenu.fxml");
+        SceneSwapper.SwapScene("StudentHubAdminMenu.fxml");
     }
 
     @FXML

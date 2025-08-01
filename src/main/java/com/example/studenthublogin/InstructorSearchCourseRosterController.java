@@ -12,14 +12,14 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Objects;
 
-public class InstructorSearchCourseRosterController {
+public class InstructorSearchCourseRosterController extends SceneController {
 
     @FXML
     private VBox instructorSearchCourseRosterVBox;
 
     @FXML
     protected void onInstructorReturnToMenuPress() throws IOException {
-        new SceneSwitch(instructorSearchCourseRosterVBox, "StudentHubInstructorMenu.fxml");
+        SceneSwapper.SwapScene("StudentHubInstructorMenu.fxml");
     }
 
     @FXML
