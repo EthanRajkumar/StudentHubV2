@@ -66,7 +66,7 @@ public class AdminAddNewInstructorController {
                 return;
             }
 
-            Admin.CreateStudent(setInstructorFirstName.getText(), setInstructorLastName.getText(), setInstructorID.getText(), setInstructorID.getText(), setInstructorDept.getText(), hireYearInput);
+            Admin.CreateInstructor(setInstructorFirstName.getText(), setInstructorLastName.getText(), setInstructorID.getText(), setInstructorEmail.getText(), setInstructorTitle.getText(), setInstructorDept.getText(), hireYearInput);
 
             SqlExecuter.RunUpdate("", "INSERT INTO LOGIN VALUES ('" + setInstructorEmail.getText() + "', 'instructor', '" + setInstructorEmail.getText() + "')");
 

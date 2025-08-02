@@ -289,11 +289,23 @@ public class Admin extends User {
 		SqlExecuter.RunUpdate("", update);
 	}
 
-	public static void CreateAdmin(String in_name, String in_surname, String in_id, String in_email, String in_title, String in_major, int in_hireyear)
+	public static void CreateInstructor(String in_name, String in_surname, String in_id, String in_email, String in_title, String in_major, int in_hireyear)
 	{
 		Instructor newInstructor = new Instructor(in_name, in_surname, in_id, in_title, in_hireyear, in_major, in_email);
 		String update = SqlSerializer.InstructorToSql(newInstructor, "INSTRUCTOR");
 		SqlExecuter.RunUpdate("", update);
+	}
+
+	public static void CreateCourse(String in_title, String in_dept, int in_crn, int in_time, String[] in_days, String[] in_semesters, int in_years, int in_credits, int in_seats)
+	{
+		Course newCourse = new Course(in_title, in_dept, in_crn, in_time, in_days, in_semesters, in_years, in_credits, in_seats, "");
+		String update = SqlSerializer.CourseToSql(newCourse, "COURSE");
+		SqlExecuter.RunUpdate("", update);
+	}
+
+	public static void RemoveCourse(int in_crn)
+	{
+		SqlExecuter.RunUpdate("", "DELETE FROM COURSE WHERE CRN = " + in_crn);
 	}
 	
 	public void CreateUser()
@@ -452,129 +464,38 @@ public class Admin extends User {
 		System.out.println("Successfully deleted user ID: " + id + ".");
 	}
 	
-	public void AddStudentToCourse() throws SQLException {
-		//System.out.println("Successfully added student ID: " + studentID + " to course ID: " + courseID + ".");
-		System.out.println("Add student to course selected...");
-		Scanner reader = new Scanner(System.in);
-		int courseID;
-		String studentID;
-
-		PrintAllCourses();
-
-		System.out.println("Enter the course ID of the course you'd like to add a student to: ");
-		courseID = reader.nextInt();
-		reader.nextLine();
-
-		PrintCourseRoster(courseID);
-
-		System.out.println("Enter the ID of the student you'd like to add to this course: ");
-		studentID = reader.nextLine();
-
-		var url = "jdbc:sqlite:Data/assignment3.db";
-		String query = "SELECT STUDENTS FROM COURSE";
-		ResultSet rs = SqlExecuter.RunQuery(url, query);
-		String students = rs.getString("STUDENTS");
-		String[] studentArray = students.split(" ");
-        String update;
-        if (studentArray[0].isBlank()) {
-            update = "UPDATE COURSE SET STUDENTS = STUDENTS ||" + "'" + studentID + "'" + " WHERE CRN = " + courseID;
-        }
-		else {
-            update = "UPDATE COURSE SET STUDENTS = STUDENTS ||" + "' " + studentID + "'" + " WHERE CRN = " + courseID;
-        }
-        SqlExecuter.RunUpdate(url, update);
-
+	public static void AddStudentToCourse(String studentID, int courseID) {
+		String update = "UPDATE COURSE SET STUDENTS = STUDENTS ||" + "' " + studentID + "'" + " WHERE CRN = " + courseID;
+        SqlExecuter.RunUpdate("", update);
     }
 	
-	public void RemoveStudentFromCourse() throws SQLException {
-		//System.out.println("Successfully removed student ID: " + studentID + " from course ID: " + courseID + ".");
-		System.out.println("Remove student from course selected...");
-		Scanner reader = new Scanner(System.in);
-		int courseID;
-		String studentID;
-
-		PrintAllCourses();
-
-		System.out.println("Enter the course ID of the course you'd like to remove a student from: ");
-		courseID = reader.nextInt();
-		reader.nextLine();
-
-		PrintCourseRoster(courseID);
-		System.out.println("Enter the ID of the student you'd like to remove from this course: ");
-		studentID = reader.nextLine();
-
-		var url = "jdbc:sqlite:Data/assignment3.db";
-		String query = "SELECT STUDENTS FROM COURSE";
-		ResultSet rs = SqlExecuter.RunQuery(url, query);
+	public static boolean RemoveStudentFromCourse(String studentID, int courseID) throws SQLException {
+		String query = "SELECT STUDENTS FROM COURSE WHERE CRN = " + courseID;
+		ResultSet rs = SqlExecuter.RunQuery("", query);
 		String students = rs.getString("STUDENTS");
-		//String[] studentArray = students.split(" ");
 		String update;
 
 		if (!students.contains(studentID) || students.isBlank()) {
-			System.out.println("Entered user ID is not registered under this course; roster unchanged");
+			return false;
 		}
 
 		students = students.replace(studentID, "");
 		students = students.replace(studentID + " ", "");
-		update = "UPDATE COURSE SET STUDENTS = " + "'" + students + "'" + " WHERE CRN = " + courseID;
+		update = "UPDATE COURSE SET STUDENTS = " + "'" + students.trim() + "'" + " WHERE CRN = " + courseID;
 
-		SqlExecuter.RunUpdate(url, update);
-
-
+		SqlExecuter.RunUpdate("", update);
+		return true;
 	}
 
-	public void LinkInstructorToCourse() {
-		System.out.println("Link instructor to course selected...");
-		Scanner reader = new Scanner(System.in);
-		int courseID;
-		String instructorID;
+	public static void LinkInstructorToCourse(String instructorID, int courseID) {
 
-		PrintAllCourses();
-
-		System.out.println("Enter the course ID of the course you'd like to link an instructor to: ");
-		courseID = reader.nextInt();
-		reader.nextLine();
-
-		PrintCourseRoster(courseID);
-
-		System.out.println("Enter the ID of the instructor you'd like to link to this course (if there is an instructor already linked, they will be overwritten)");
-		instructorID = reader.nextLine();
-
-		var url = "jdbc:sqlite:Data/assignment3.db";
 		String update = "UPDATE COURSE SET INSTRUCTOR = '" + instructorID + "'" + " WHERE CRN = " + courseID;
-		SqlExecuter.RunUpdate(url, update);
-
-
+		SqlExecuter.RunUpdate("", update);
 	}
 
-	public void UnlinkInstructorFromCourse() {
-		System.out.println("Unlink instructor from course selected...");
-		Scanner reader = new Scanner(System.in);
-		int courseID;
-
-		PrintAllCourses();
-
-		System.out.println("Enter the course ID of the course you'd like to unlink an instructor from: ");
-		courseID = reader.nextInt();
-		reader.nextLine();
-
-		PrintCourseRoster(courseID);
-
-		int confirm;
-		System.out.println("Unlink instructor from this course? (Yes=1, No=0)");
-		confirm = reader.nextInt();
-		reader.nextLine();
-
-		if (confirm == 1) {
-			var url = "jdbc:sqlite:Data/assignment3.db";
-			String update = "UPDATE COURSE SET INSTRUCTOR = ''" + " WHERE CRN = " + courseID;
-			SqlExecuter.RunUpdate(url, update);
-			System.out.println("Instructor unlinked");
-		}
-		else {
-			System.out.println("Instructor was not unlinked");
-		}
-
+	public static void UninkInstructorFromCourse(int courseID) {
+		String update = "UPDATE COURSE SET INSTRUCTOR = ''" + " WHERE CRN = " + courseID;
+		SqlExecuter.RunUpdate("", update);
 	}
 	
 	public void SearchClass(int classID)

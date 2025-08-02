@@ -24,7 +24,7 @@ public class AdminMenuController extends SceneController {
 
     @FXML
     protected void onAdminSelectUnregisterStudent() throws IOException {
-        //SceneSwapper.SwapScene("StudentHubAdmin.fxml");
+        SceneSwapper.SwapScene("StudentHubAdminUnregisterStudent.fxml");
     }
 
     @FXML
@@ -64,7 +64,7 @@ public class AdminMenuController extends SceneController {
 
     @FXML
     protected void onAdminSelectRegisterStudent() throws IOException {
-        SceneSwapper.SwapScene("StudentHubAdminUnregisterStudent.fxml");
+        SceneSwapper.SwapScene("StudentHubAdminRegisterStudent.fxml");
     }
 
 }

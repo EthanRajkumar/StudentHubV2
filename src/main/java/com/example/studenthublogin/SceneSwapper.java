@@ -24,13 +24,25 @@ public class SceneSwapper {
                 return loader.<StudentMenuController>getController();
 
             case "StudentHubAdminRemoveCourse.fxml":
-                return loader.<StudentRemoveCourseController>getController();
+                return loader.<AdminRemoveCourseController>getController();
 
             case "StudentHubAdminSearchCourse.fxml":
                 return loader.<StudentSearchCourseController>getController();
 
             case "StudentHubAdminSearchCourseAdv.fxml":
                 return loader.<StudentSearchCourseAdvController>getController();
+
+            case "StudentHubAdminLinkInstructor.fxml":
+                return loader.<AdminLinkInstructorController>getController();
+
+            case "StudentHubAdminUnlinkInstructor.fxml":
+                return loader.<AdminUnlinkInstructorController>getController();
+
+            case "StudentHubAdminRegisterStudent.fxml":
+                return loader.<AdminRegisterStudentController>getController();
+
+            case "StudentHubAdminUnregisterStudent.fxml":
+                return loader.<AdminUnregisterStudentController>getController();
 
             case "StudentHubInstructorMenu.fxml":
                 return loader.<InstructorMenuController>getController();

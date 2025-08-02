@@ -51,6 +51,22 @@ public abstract class User {
 		System.out.println("User: " + first_name + " " + last_name + ", ID: " + id);
 	}
 
+	public static List<Course> GetAllCourses()
+	{
+		List<Course> courses = new ArrayList<>();
+		ResultSet rs = SqlExecuter.RunQuery("", "SELECT * FROM COURSE;");
+
+		try {
+			while (rs.next()) {
+				courses.add(SqlSerializer.CourseFromSql(rs));
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+
+		return courses;
+	}
+
 	//copied from Instructor so that Student and Admin can also use function
 	public static List<Course> SearchCoursebyDept(String department)
 	{
