@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.ResultSet;
@@ -29,6 +30,14 @@ public class HelloController extends SceneController {
 
     @FXML
     private VBox loginVBox;
+
+    @Override
+    public void Initialize(Stage stage)
+    {
+        Globals.Student = null;
+        Globals.Instructor = null;
+        Globals.Admin = null;
+    }
 
     @FXML
     protected void onLoginButtonClick() throws IOException {

@@ -2,6 +2,8 @@ package com.example.studenthublogin;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 //User responsible for Instructor functionality is Matthew Spillane
@@ -262,4 +264,18 @@ public class Instructor extends User {
 		}
 	}
 
+	public List<Course> GetTeachingSchedule()
+	{
+		List<Course> courses = new ArrayList<>();
+		ResultSet rs = SqlExecuter.RunQuery("", "SELECT * FROM COURSE WHERE INSTRUCTOR = '" + id + "';");
+		try {
+			while (rs.next()) {
+				courses.add(SqlSerializer.CourseFromSql(rs));
+			}
+		} catch (SQLException e) {
+			System.out.println("Database error: " + e.getMessage());
+		}
+
+		return courses;
+	}
 }

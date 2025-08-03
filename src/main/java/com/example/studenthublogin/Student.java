@@ -1,5 +1,7 @@
 package com.example.studenthublogin;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -37,24 +39,18 @@ public class Student extends User {
 		System.out.println("Successfully searched for class ID " + classID + ".");
 	}
 
-	public boolean AddClass()
+	public String AddClass(String title)
 	{
-		Scanner scanner = new Scanner(System.in);
-		String title = "";
-		ResultSet rs = null;
+		ResultSet rs;
 		String query;
 
 		try
 		{
-			System.out.println("Please enter the name of the course you wish to add (case sensitive): ");
-			title = scanner.nextLine();
-
 			query = "SELECT * FROM COURSE WHERE TITLE = '" + title + "';";
 			rs = SqlExecuter.RunQuery("", query);
 
 			if (rs.getString("TITLE") == null) {
-				System.out.println("Invalid course ID detected.");
-				return false;
+				return "Invalid course ID detected.";
 			}
 
 			String students = rs.getString("STUDENTS");
@@ -64,8 +60,7 @@ public class Student extends User {
 				students = "";
 			}
 			else if (students.contains(id)) {
-				System.out.println("You are already enrolled in this course.");
-				return false;
+				return "You are already enrolled in this course.";
 			}
 			else
 			{
@@ -73,13 +68,11 @@ public class Student extends User {
 
 				if (ids.length >= rs.getInt("SEATS"))
 				{
-					System.out.println("This course is currently full!");
-					return false;
+					return "This course is currently full!";
 				}
 				else if (IsTimeConflict(rs.getInt("TIME"), rs.getString("DAYS").split(" "), rs.getString("SEMESTERS").split(" "), rs.getInt("YEAR")))
 				{
-					System.out.println("Time conflict detected.");
-					return false;
+					return "Time conflict detected.";
 				}
 			}
 
@@ -89,13 +82,11 @@ public class Student extends User {
 			query = "UPDATE COURSE SET STUDENTS = '" + students + "' WHERE TITLE = '" + title + "';";
 			SqlExecuter.RunUpdate("", query);
 
-			System.out.println(first_name + " " + last_name + " has signed up for course " + rs.getString("TITLE") + ".");
-			return true;
+			return "Successfully registered for course " + rs.getString("TITLE") + ".";
 		}
 		catch (SQLException e)
 		{
-			System.out.println(e);
-			return false;
+			return "Database Error: " + e;
 		}
 	}
 
@@ -168,33 +159,23 @@ public class Student extends User {
 		return false;
 	}
 
-
-	public boolean RemoveClass()
+	public String RemoveClass(String title)
 	{
-		Scanner scanner = new Scanner(System.in);
-		String title = "";
-
-		ResultSet rs = null;
+		ResultSet rs;
 		String query;
 
 		try {
-
-			System.out.println("Please enter the name of the course you wish to add (case sensitive): ");
-			title = scanner.nextLine();
-
 			query = "SELECT * FROM COURSE WHERE TITLE = '" + title + "';";
 			rs = SqlExecuter.RunQuery("", query);
 
 			if (rs.getString("TITLE") == null) {
-				System.out.println("Invalid course ID detected.");
-				return false;
+				return "Invalid course ID detected.";
 			}
 
 			String students = rs.getString("STUDENTS");
 
 			if (!students.contains(id)) {
-				System.out.println("You are not currently enrolled in this course.");
-				return false;
+				return "You are not currently enrolled in this course.";
 			}
 
 			students = students.replace(id, "");
@@ -204,13 +185,11 @@ public class Student extends User {
 			query = "UPDATE COURSE SET STUDENTS = '" + students + "' WHERE TITLE = '" + title + "';";
 			SqlExecuter.RunUpdate("", query);
 
-			System.out.println(first_name + " " + last_name + " has unregistered for course " + rs.getString("TITLE") + ".");
-			return true;
+			return "Successfully unregistered for course " + rs.getString("TITLE") + ".";
 		}
 		catch (SQLException e)
 		{
-			System.out.println(e);
-			return false;
+			return "Database error: " + e;
 		}
 	}
 
@@ -239,5 +218,22 @@ public class Student extends User {
 		if (i == 0)
 			System.out.println("[Schedule is empty]");
 	}
+
+	public List<Course> GetSchedule()
+	{
+		List<Course> courses = new ArrayList<>();
+		ResultSet rs = SqlExecuter.RunQuery("", "SELECT * FROM COURSE WHERE STUDENTS LIKE '%" + id + "%';");
+		try {
+			while (rs.next()) {
+				courses.add(SqlSerializer.CourseFromSql(rs));
+			}
+		} catch (SQLException e) {
+			System.out.println("Database error: " + e.getMessage());
+		}
+
+		return courses;
+	}
+
+
 }
 
