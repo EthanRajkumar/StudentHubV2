@@ -145,6 +145,91 @@ public class Instructor extends User {
 			System.out.println("Database error: " + e.getMessage());
 		}
 	}
+
+	public List<Course> GetCourseRoster()
+	{
+		List<Course> courses = new ArrayList<>();
+		ResultSet rs =  SqlExecuter.RunQuery("", "SELECT * FROM COURSE WHERE INSTRUCTOR = '" + id + "';");
+
+		try {
+			while (rs.next()) {
+				courses.add(SqlSerializer.CourseFromSql(rs));
+			}
+		}
+		catch (SQLException e) {
+			System.out.println("Database error: " + e.getMessage());
+		}
+
+		return courses;
+	}
+
+	public List<Course> GetCourseRoster(String title)
+	{
+		List<Course> courses = new ArrayList<>();
+		ResultSet rs =  SqlExecuter.RunQuery("", "SELECT * FROM COURSE WHERE INSTRUCTOR = '" + id + "' AND TITLE = '" + title + "';");
+
+		try {
+			while (rs.next()) {
+				courses.add(SqlSerializer.CourseFromSql(rs));
+			}
+		}
+		catch (SQLException e) {
+			System.out.println("Database error: " + e.getMessage());
+		}
+
+		return courses;
+	}
+
+	public List<Student> SearchCourseRoster(int crn, String name, String surname)
+	{
+		List<Student> students = new ArrayList<>();
+		Course course = null;
+		ResultSet rs =  SqlExecuter.RunQuery("", "SELECT * FROM COURSE WHERE INSTRUCTOR = '" + id + "' AND CRN = " + crn + ";");
+
+		try {
+			if (rs.next()) {
+				course = SqlSerializer.CourseFromSql(rs);
+			}
+		}
+		catch (SQLException e) {
+			System.out.println("Database error: " + e.getMessage());
+			return students;
+		}
+
+		String ids = course.getStudentIDsString();
+
+		rs = SqlExecuter.RunQuery("", "SELECT * FROM STUDENT WHERE NAME = '" + name + "' AND SURNAME = '" + surname + "';");
+
+		try {
+			while (rs.next()) {
+				if (ids.contains(rs.getString("ID")))
+					students.add(SqlSerializer.StudentFromSql(rs));
+			}
+		}
+		catch (SQLException e) {
+			System.out.println("Database error: " + e.getMessage());
+			return students;
+		}
+
+		return students;
+	}
+
+	public List<Course> GetCourseRoster(int crn)
+	{
+		List<Course> courses = new ArrayList<>();
+		ResultSet rs =  SqlExecuter.RunQuery("", "SELECT * FROM COURSE WHERE INSTRUCTOR = '" + id + "' AND CRN = " + crn + ";");
+
+		try {
+			while (rs.next()) {
+				courses.add(SqlSerializer.CourseFromSql(rs));
+			}
+		}
+		catch (SQLException e) {
+			System.out.println("Database error: " + e.getMessage());
+		}
+
+		return courses;
+	}
 	
 	public void PrintCourseRoster()
 	{

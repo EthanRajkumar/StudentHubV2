@@ -255,7 +255,7 @@ public class Admin extends User {
 
 			}
 		}
-		Course newCourse = new Course(courseName, courseDept, CRN, time, days, semesters, year, cred, seats, "");
+		Course newCourse = new Course(courseName, courseDept, CRN, time, days, semesters, year, cred, seats, "", new String[] {});
 		String update = SqlSerializer.CourseToSql(newCourse,"COURSE");
 		SqlExecuter.RunUpdate("", update);
 		System.out.println("Course created: \nName: " + newCourse.getTitle() + "\nDepartment: " + newCourse.getDepartment() + "\nCourse ID: " + newCourse.getCRN()
@@ -298,7 +298,7 @@ public class Admin extends User {
 
 	public static void CreateCourse(String in_title, String in_dept, int in_crn, int in_time, String[] in_days, String[] in_semesters, int in_years, int in_credits, int in_seats)
 	{
-		Course newCourse = new Course(in_title, in_dept, in_crn, in_time, in_days, in_semesters, in_years, in_credits, in_seats, "");
+		Course newCourse = new Course(in_title, in_dept, in_crn, in_time, in_days, in_semesters, in_years, in_credits, in_seats, "", new String[] {});
 		String update = SqlSerializer.CourseToSql(newCourse, "COURSE");
 		SqlExecuter.RunUpdate("", update);
 	}

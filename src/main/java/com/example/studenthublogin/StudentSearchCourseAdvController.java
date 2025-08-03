@@ -25,7 +25,7 @@ public class StudentSearchCourseAdvController extends SceneController {
     private TextField searchCourseName, searchCourseDept, searchCourseYear, searchCourseID, searchCourseSemester;
 
     @FXML
-    private TableColumn courseTableCourseID, courseTableCourseName, courseTableDept, courseTableTime, courseTableDays, courseTableSemesters, courseTableYear, courseTableCredits, courseTableSeats, courseTableInstructor;
+    private TableColumn courseTableCourseID, courseTableCourseName, courseTableDept, courseTableTime, courseTableDays, courseTableSemesters, courseTableYear, courseTableCredits, courseTableSeats, courseTableInstructor, courseTableRoster;
 
     @Override
     public void Initialize(Stage stage)
@@ -41,6 +41,7 @@ public class StudentSearchCourseAdvController extends SceneController {
         courseTableCredits.setCellValueFactory(new PropertyValueFactory<Course, Integer>("Credits"));
         courseTableSeats.setCellValueFactory(new PropertyValueFactory<Course, Integer>("Seats"));
         courseTableInstructor.setCellValueFactory(new PropertyValueFactory<Course, String>("Instructor"));
+        courseTableRoster.setCellValueFactory(new PropertyValueFactory<Course, String>("StudentIDs"));
     }
 
     @FXML

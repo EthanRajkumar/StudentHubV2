@@ -133,13 +133,14 @@ public class SqlSerializer {
             String department = rs.getString("DEPARTMENT");
             String instructorID = rs.getString("INSTRUCTOR");
             int time = Integer.parseInt(rs.getString("TIME"));
-            String[] days = new String[]{rs.getString("DAYS")},
-                    semesters = new String[]{rs.getString("SEMESTERS")};
+            String[] days = rs.getString("DAYS").split(" "),
+                    semesters = rs.getString("SEMESTERS").split(" "),
+                    studentIDs = rs.getString("STUDENTS").split(" ");
             int year = Integer.parseInt(rs.getString("YEAR")),
                     credits = Integer.parseInt(rs.getString("CREDITS")),
                     seats = Integer.parseInt(rs.getString("SEATS"));
 
-            return new Course(title, department, id, time, days, semesters, year, credits, seats, instructorID);
+            return new Course(title, department, id, time, days, semesters, year, credits, seats, instructorID, studentIDs);
         } catch (SQLException e) {
             System.out.println("Error parsing Course object. " + e);
             return null;

@@ -1,5 +1,8 @@
 package com.example.studenthublogin;
 
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -10,14 +13,75 @@ import java.sql.SQLException;
 public class Student extends User {
 	int expected_grad_year;
 	String major, email;
+	public SimpleStringProperty FullName, ID, Email, Major;
+	public SimpleIntegerProperty GradYear;
 
 	public Student(String first_name, String last_name, String id, int in_expected_grad_year, String in_major, String in_email) {
 		super(first_name, last_name, id);
 		expected_grad_year = in_expected_grad_year;
-        major = in_major;
+		major = in_major;
 		email = in_email;
+		FullName = new SimpleStringProperty(last_name + ", " + first_name);
+		ID = new SimpleStringProperty(id);
+		Email = new SimpleStringProperty(email);
+		Major = new SimpleStringProperty(major);
+		GradYear = new SimpleIntegerProperty(in_expected_grad_year);
 	}
 
+	public String getFullName() { return last_name + ", " + first_name; }
+
+	public String getID() { return ID.get(); }
+
+	public int getGradYear()
+	{
+		return GradYear.get();
+	}
+
+	public String getMajor()
+	{
+		return Major.get();
+	}
+
+	public String getEmail()
+	{
+		return Email.get();
+	}
+
+	public void setFullName(String value)
+	{
+		String[] names = value.split(", ");
+
+		if (names.length < 2)
+			return;
+
+		FullName.set(value);
+		first_name = names[1];
+		last_name = names[0];
+	}
+
+	public void setID(String value)
+	{
+		id = value;
+		ID.set(value);
+	}
+
+	public void setGradYear(int value)
+	{
+		GradYear.set(value);
+		expected_grad_year = value;
+	}
+
+	public void setMajor(String value)
+	{
+		Major.setValue(value);
+		major = value;
+	}
+
+	public void setEmail(String value)
+	{
+		Email.setValue(value);
+		email = value;
+	}
 
 	public int GetGraduationYear()
 	{

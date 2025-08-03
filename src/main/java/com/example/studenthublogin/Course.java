@@ -8,12 +8,12 @@ import java.sql.SQLException;
 import java.util.Arrays;
 
 public class Course {
-    String[] days, semesters;
+    String[] days, semesters, studentIDs;
     String instructorID;
-    public SimpleStringProperty Title, Department, DaysString, SemestersString, Instructor;
+    public SimpleStringProperty Title, Department, DaysString, SemestersString, StudentIDsString, Instructor;
     public SimpleIntegerProperty CRN, Year, Credits, Seats, Time;
 
-    public Course(String in_title,  String in_department, int in_CRN, int in_time, String[] in_days, String[] in_semesters, int in_year, int in_credits, int in_seats, String instructorID){
+    public Course(String in_title,  String in_department, int in_CRN, int in_time, String[] in_days, String[] in_semesters, int in_year, int in_credits, int in_seats, String instructorID, String[] studentIDs) {
         Title = new SimpleStringProperty(in_title);
         Department = new SimpleStringProperty(in_department);
         CRN = new SimpleIntegerProperty(in_CRN);
@@ -24,11 +24,13 @@ public class Course {
 
         SemestersString = new SimpleStringProperty("");
         DaysString = new SimpleStringProperty("");
+        StudentIDsString = new SimpleStringProperty("");
         Instructor = new SimpleStringProperty("");
 
         setSemestersString(in_semesters);
         setDaysString(in_days);
         setInstructor(instructorID);
+        setStudentIDsString(studentIDs);
     }
 
     public String getTitle() {
@@ -48,6 +50,8 @@ public class Course {
     public String getSemestersString() {
         return SemestersString.get();
     }
+
+    public String getStudentIDsString() { return StudentIDsString.get(); }
 
     public String[] getDays() { return days; }
 
@@ -111,6 +115,23 @@ public class Course {
         }
 
         SemestersString.set(sb.toString());
+    }
+
+    public void setStudentIDsString(String[] in_studentIDs) {
+        studentIDs = in_studentIDs;
+
+        StringBuilder sb = new StringBuilder();
+
+        for(int i = 0; i < studentIDs.length; i++)
+        {
+            if (i > 0)
+                sb.append(", ");
+
+            if (studentIDs[i].length() > 0)
+                sb.append(studentIDs[i]);
+        }
+
+        StudentIDsString.set(sb.toString());
     }
 
     public void setYear(int in_year) {
