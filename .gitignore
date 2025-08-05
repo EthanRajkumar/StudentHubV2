@@ -6,7 +6,6 @@ target/
 ### IntelliJ IDEA ###
 .idea/compiler.xml
 *.iws
-*.iml
 *.ipr
 
 ### Eclipse ###
